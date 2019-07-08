@@ -39,6 +39,8 @@ public class NfcInFlutterPlugin implements MethodCallHandler,
     private NfcAdapter adapter;
     private EventChannel.EventSink events;
 
+    private final int READER_FLAGS = NfcAdapter.FLAG_READER_NFC_A | NfcAdapter.FLAG_READER_NFC_B | NfcAdapter.FLAG_READER_NFC_F | NfcAdapter.FLAG_READER_NFC_V;
+
     private String currentReaderMode = null;
 
     /**
@@ -110,7 +112,7 @@ public class NfcInFlutterPlugin implements MethodCallHandler,
         adapter = NfcAdapter.getDefaultAdapter(activity);
         if (adapter == null) return;
         Bundle bundle = new Bundle();
-        adapter.enableReaderMode(activity, this, NfcAdapter.FLAG_READER_NFC_A, bundle);
+        adapter.enableReaderMode(activity, this, READER_FLAGS, bundle);
     }
 
     private void startReadingWithForegroundDispatch() {
